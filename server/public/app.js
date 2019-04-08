@@ -31,6 +31,7 @@ class App extends Component {
 
   async fetchTerms(query) {
     // fake query
+    console.log("fake query", query)
     await new Promise(resolve => setTimeout(resolve, 1000))
     return [
       {
