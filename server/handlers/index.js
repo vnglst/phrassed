@@ -7,7 +7,8 @@ module.exports.renderRoot = async function renderRoot(req, res) {
   const { q } = req.query
 
   const terms = await catchErrors(termsQueries.searchTerm)({
-    lang: "german",
+    l1: "german",
+    l2: "dutch",
     term: q
   })
 
@@ -22,11 +23,14 @@ module.exports.renderRoot = async function renderRoot(req, res) {
 module.exports.renderTerm = async function renderTerm(req, res, next) {
   const comboArr = req.params.combo.split("-")
   if (!isValidLanguageCombo(comboArr)) next()
-  const [lang1] = comboArr
+  const [l1, l2] = comboArr
   const terms = await catchErrors(termsQueries.getTerm)({
-    lang: lang1,
+    l1,
+    l2,
     term: req.params.term
   })
+
+  // const terms = await termsQueries.getAllTerms()
 
   res.status(200).send(terms)
 }

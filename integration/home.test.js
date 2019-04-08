@@ -20,9 +20,7 @@ describe("When sending a query", () => {
     const response = await request.get("/?q=Anlage")
     document.documentElement.innerHTML = response.text
     expect(response.text).toContain("IATE-1104363")
-    expect(response.text).toContain("Anlage")
     expect(response.text).toContain("belegging")
-    expect(response.text).toContain("investment")
   })
   it("should contain example sentence", async () => {
     const response = await request.get("/?q=Anlage")

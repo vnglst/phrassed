@@ -23,30 +23,11 @@
     <ul>
       <% for(const term of terms) { %>
       <li>
-        <div>IATE-<%= term.sourceId %></div>
-        <div>
-          German: 
-          <a href="/german-dutch/<%= term.de %>">
-            <%= term.de %>
+        <div><%= term.termid %>
+          <%= term.language %> : <a href="/german-dutch/<%= term.term %>">
+          <%= term.term %>
           </a>
         </div>
-        <div>
-          Dutch: 
-          <a href="/dutch-german/<%= term.nl %>">
-            <%= term.nl %>
-          </a>
-        </div>
-        <div>
-          English: 
-          <a href="/english-german/<%= term.en %>">
-            <%= term.en %>
-          </a>
-        </div>
-        <div>
-          Domain:
-          <a href="/german-dutch/domain/<%= term.domain %>">
-            <%= term.domain %>
-          </a>
       </div>
       </li>
       <% } %>

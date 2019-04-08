@@ -12,8 +12,7 @@
     "lint": "eslint server/ --fix",
     "lint:ci": "eslint integration/ server/ --format junit -o reports/junit/js-lint-results.xml",
     "prettier": "prettier server/** --write",
-    "db:migrate": "knex migrate:latest --env development",
-    "db:seed": "knex seed:run --env development",
+    "db:reset": "knex migrate:rollback; knex db:migrate; knex db:seed",
     "circleci": "circleci local execute --job build"
   },
   "dependencies": {
