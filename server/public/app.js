@@ -34,7 +34,7 @@ class App extends Component {
     await new Promise(resolve => setTimeout(resolve, 1000))
     return [
       {
-        de: "Anlage" + query,
+        de: "Anlage",
         nl: "installatie",
         en: "installation",
         sourceId: "1234"
