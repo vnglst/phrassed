@@ -11,23 +11,20 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
       - run:
           name: install-yarn
           command: yarn
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
       - run:
           name: "Linting"
           command: yarn lint:ci
       - run:
-          name: "Run Unit Tests"
-          command: yarn test:unit --ci
-      - run:
-          name: "Run Integration Tests"
-          command: yarn test:integration
+          name: "Run Tests"
+          command: yarn test:ci
           environment:
             JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
       - store_test_results:
