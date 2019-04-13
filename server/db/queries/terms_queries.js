@@ -6,11 +6,11 @@ const langTermMapper = {
   english: "en"
 }
 
-function getAllTerms() {
+module.exports.getAllTerms = function getAllTerms() {
   return knex("terms").select("*")
 }
 
-function getTerm({ term, l1, l2 }) {
+module.exports.getTerm = function getTerm({ term, l1, l2 }) {
   const subquery = knex("terms")
     .select("termid")
     .where("language", langTermMapper[l1])
@@ -22,7 +22,7 @@ function getTerm({ term, l1, l2 }) {
     .where("termid", "in", subquery)
 }
 
-function searchTerm({ term, l1, l2 }) {
+module.exports.searchTerm = function searchTerm({ term, l1, l2 }) {
   const subquery = knex("terms")
     .select("termid")
     .where("language", langTermMapper[l1])
@@ -34,8 +34,11 @@ function searchTerm({ term, l1, l2 }) {
     .where("termid", "in", subquery)
 }
 
-module.exports = {
-  getAllTerms,
-  getTerm,
-  searchTerm
+module.exports.suggestions = function suggestions({ q, l1 }) {
+  return knex("terms")
+    .select("term")
+    .distinct()
+    .where("language", langTermMapper[l1])
+    .where("term", "ilike", `${q}%`)
+    .whereNot("term", "ilike", q)
 }

@@ -30,9 +30,17 @@ module.exports.renderTerm = async function renderTerm(req, res, next) {
     term: req.params.term
   })
 
-  // const terms = await termsQueries.getAllTerms()
+  res.render("term", { title: "Phrassed", terms })
+}
 
-  res.status(200).send(terms)
+module.exports.suggestions = async function suggestions(req, res) {
+  const queryResult = await catchErrors(termsQueries.suggestions)({
+    l1: "german",
+    q: req.query.q
+  })
+
+  const result = queryResult.map(t => t.term)
+  res.status(200).send(result)
 }
 
 module.exports.renderDomains = async function(req, res, next) {

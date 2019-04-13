@@ -9,29 +9,20 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  line-height: 1.4;
-
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 0 10px;
-
-  color: #dbdbdb;
-  background: #202b38;
-
+  font-family: "Helvetica", "Arial", sans-serif;
   text-rendering: optimizeLegibility;
+  margin: 0 auto;
+  max-width: 50em;
+  line-height: 1.5em;
+  padding: 4em 1em;
+  color: #555;
 }
 
-button,
-input,
-textarea {
-  transition: background-color 0.1s linear, border-color 0.1s linear,
-    color 0.1s linear, box-shadow 0.1s linear, transform 0.1s ease;
+h1,
+h2,
+strong {
+  color: #333;
 }
-
-/* Links */
 
 a {
   text-decoration: none;
@@ -42,58 +33,34 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Forms */
-
 button,
 input[type="submit"],
-input[type="button"],
-input[type="checkbox"] {
+input[type="button"] {
   cursor: pointer;
 }
 
 input,
-select,
-button,
-textarea {
-  color: #ffffff;
-  background-color: #161f27;
-
+button {
   font-family: inherit;
   font-size: inherit;
-
-  margin: 5px;
-  padding: 10px;
-
-  border: none;
-  border-radius: 6px;
-  outline: none;
+  padding: 0.5em;
+  border: 1px solid #333;
+  border-radius: 10px;
 }
 
 button,
 input[type="submit"],
 input[type="button"] {
-  padding-right: 30px;
-  padding-left: 30px;
+  margin: 0.5em;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
 }
 
 button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
-  background: #324759;
-}
-
-input:focus,
-select:focus,
-button:focus,
-textarea:focus {
-  box-shadow: 0 0 0 2px #0096bfab;
-}
-
-input[type="checkbox"]:active,
-input[type="submit"]:active,
-input[type="button"]:active,
-button:active {
-  transform: translateY(2px);
+  background: #111;
+  color: #eee;
 }
 
 input:disabled {
@@ -101,17 +68,53 @@ input:disabled {
   opacity: 0.5;
 }
 
-::placeholder {
-  color: #a9a9a9;
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* Misc */
-
-img {
-  max-width: 100%;
+.wrapper {
+  position: relative;
+  margin: 0.5em;
 }
 
-hr {
+.suggestions {
+  position: absolute;
+  top: 1.1em;
+  padding-top: 0.2em;
+  left: 0;
+  width: 100%;
+  border-top: none;
+  border: 1px solid #333;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #fff;
+}
+
+.suggestions button {
+  background-color: #fff;
+  text-align: left;
+  display: block;
+  width: 100%;
   border: none;
-  border-top: 1px solid #dbdbdb;
+  border-radius: 0;
+  margin: 0;
+  padding: 0.5em 0.5em;
+}
+
+.suggestions button:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.suggestions button:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.suggestions .highlighted {
+  background-color: #eee;
 }
