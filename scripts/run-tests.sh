@@ -11,4 +11,4 @@ echo "---> Resetting database"
 yarn db:reset
 
 echo "---> Running tests"
-yarn jest ./ "$@"
+yarn jest ./server "$@"

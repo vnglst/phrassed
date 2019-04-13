@@ -10,7 +10,7 @@
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test --reporters=default --reporters=jest-junit",
     "test:ci": "yarn test:coverage",
-    "lint": "eslint integration/ server/",
+    "lint": "eslint server/",
     "lint:ci": "yarn lint --format junit -o reports/junit/js-lint-results.xml",
     "prettier": "prettier integration/** server/**",
     "db:reset": "knex migrate:rollback; knex migrate:latest; knex seed:run",
