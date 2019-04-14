@@ -1,14 +1,16 @@
 const express = require("express")
-const handlers = require("../handlers")
+const handlers = require("../handlers/")
 
 const router = express.Router()
 
-router.get("/", handlers.renderRoot)
-router.get("/:combo/:term", handlers.renderTerm)
-router.get("/:combo/domain/", handlers.renderDomains)
-router.get("/:combo/domain/:domain", handlers.renderTermsForDomain)
-router.get("/id/:id", handlers.renderId)
+// API
+router.get("/api/suggestions", handlers.api.suggestions)
 
-router.get("/api/suggestions", handlers.suggestions)
+// Web pages
+router.get("/", handlers.web.renderRoot)
+router.get("/:combo/:term", handlers.web.renderTerm)
+router.get("/:combo/domain/", handlers.web.renderDomains)
+router.get("/:combo/domain/:domain", handlers.web.renderTermsForDomain)
+router.get("/id/:id", handlers.web.renderId)
 
 module.exports = router
