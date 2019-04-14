@@ -46,6 +46,7 @@ button {
   padding: 0.5em;
   border: 1px solid #333;
   border-radius: 10px;
+  caret-color: #00baff;
 }
 
 button,
@@ -77,7 +78,7 @@ li {
 
 .wrapper {
   position: relative;
-  margin: 0.5em;
+  margin: 0.5em 0;
 }
 
 .suggestions {

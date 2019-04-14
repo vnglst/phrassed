@@ -1,35 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %> - terminology translations with example phrases</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script src="/app.js" type="module" ></script>
-  </head>
-  <body>
-  <h1><a href="/"><%= title %></a></h1>
-    <div id="reacthook">
-      <form action="/" method="get">
-        <label for="site-search">Search terminology</label>
-        <input
-          type="search"
-          id="searchbox"
-          name="q"
-          aria-label="Search all terminology"
-        />
-        <input type="submit" />
-      </form>
-    </div>
-    <ul>
-      <% for(const term of terms) { %>
-      <li>
-        <div><%= term.termid %>
-          <%= term.language %> : <a href="/dutch-german/<%= term.term %>">
-          <%= term.term %>
-          </a>
-        </div>
-      </div>
-      </li>
-      <% } %>
-    </ul>
-  </body>
-</html>
+<%- include('layout/header'); -%>
+<%- include('partials/terms-partial'); -%>
+<%- include('layout/footer'); -%>

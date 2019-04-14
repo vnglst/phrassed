@@ -5,32 +5,46 @@ const LANGS = ["german", "english", "dutch"]
 
 module.exports.renderRoot = async function renderRoot(req, res) {
   const { q } = req.query
+  const l1 = "german"
+  const l2 = "dutch"
 
   const terms = await catchErrors(termsQueries.searchTerm)({
-    l1: "german",
-    l2: "dutch",
+    l1,
+    l2,
     term: q
   })
 
   const phrases = await catchErrors(phrasesQueries.searchInPhrases)({
-    lang: "german",
+    lang: l1,
     query: q
   })
 
-  res.render("index", { title: "Phrassed", terms, phrases })
+  res.render("index", {
+    title: `Phrassed - terminology translations with example phrases`,
+    l1,
+    l2,
+    terms,
+    phrases
+  })
 }
 
 module.exports.renderTerm = async function renderTerm(req, res, next) {
   const comboArr = req.params.combo.split("-")
+  const { term } = req.params
   if (!isValidLanguageCombo(comboArr)) next()
   const [l1, l2] = comboArr
   const terms = await catchErrors(termsQueries.getTerm)({
     l1,
     l2,
-    term: req.params.term
+    term
   })
 
-  res.render("term", { title: "Phrassed", terms })
+  res.render("term", {
+    title: `Phrassed: ${l2} translation for the term ${l1}: ${term}`,
+    l1,
+    l2,
+    terms
+  })
 }
 
 module.exports.suggestions = async function suggestions(req, res) {

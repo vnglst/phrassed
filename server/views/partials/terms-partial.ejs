@@ -1,0 +1,12 @@
+    <ul>
+      <% for(const term of terms) { %>
+      <li>
+        <div><%= term.termid %>
+          <%= term.language %>: <a href="<%= `/${l2}-${l1}/${term.term}` %>">
+          <%= term.term %>
+          </a>
+        </div>
+      </div>
+      </li>
+      <% } %>
+    </ul>

@@ -88,7 +88,8 @@ class App extends Component {
   }
 
   handleResultClick(activeTerm) {
-    this.setState({ query: this.state.terms[activeTerm] })
+    const query = this.state.terms[activeTerm]
+    window.location.href = `/?q=${query}`
   }
 
   handleResultHover(activeTerm) {
@@ -101,16 +102,18 @@ class App extends Component {
 
     return html`
       <form action="/" method="get">
-        <label for="site-search">Search terminology</label>
         <span class="wrapper">
           <input
             type="text"
             id="searchbox"
             name="q"
-            value=${query}
-            aria-label="Search all terminology"
-            onInput=${this.handleChange}
+            aria-label="Search terminology"
             autocomplete="off"
+            maxlength="124"
+            autocorrect="off"
+            autofocus="true"
+            value=${query}
+            oninput=${this.handleChange}
             onfocus=${this.handleFocus}
             onblur=${this.handleBlur}
             onkeyup=${this.handleKeyUp}
