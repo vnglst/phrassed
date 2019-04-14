@@ -5,6 +5,8 @@ import {
 } from "https://unpkg.com/htm@2.1.1/preact/standalone.mjs"
 // updated version at: https://unpkg.com/htm/preact/standalone.mjs
 
+const SOURCE_LANG = "german" // TODO: from user
+
 function Suggestions({ terms, activeTerm, handleClick, handleHover }) {
   return html`
     <div class="suggestions">
@@ -44,8 +46,9 @@ class App extends Component {
     this.handleResultHover = this.handleResultHover.bind(this)
   }
 
-  async fetchTerms(query) {
-    const response = await fetch(`/api/suggestions/?q=${query}`)
+  async fetchTerms({ query }) {
+    const lang1 = SOURCE_LANG
+    const response = await fetch(`/api/suggestions/?q=${query}&lang1=${lang1}`)
     const json = await response.json()
     return json
   }
@@ -53,7 +56,7 @@ class App extends Component {
   async handleChange(e) {
     const query = e.target.value
     this.setState({ query })
-    const terms = await this.fetchTerms(query)
+    const terms = await this.fetchTerms({ query })
     this.setState({ terms, isOpen: true })
   }
 

@@ -1,12 +1,14 @@
 const termsQueries = require("../db/queries/terms_queries")
 const phrasesQueries = require("../db/queries/phrases_queries")
 
-const LANGS = ["german", "english", "dutch"]
+const LANGS = ["german", "english", "dutch"] // TODO: from DB
+const SOURCE_LANG = "german" // TODO: from user
+const TARGET_LANG = "dutch"
 
 module.exports.renderRoot = async function renderRoot(req, res) {
   const { q } = req.query
-  const l1 = "german"
-  const l2 = "dutch"
+  const l1 = SOURCE_LANG
+  const l2 = TARGET_LANG
 
   const terms = await catchErrors(termsQueries.searchTerm)({
     l1,
@@ -49,7 +51,7 @@ module.exports.renderTerm = async function renderTerm(req, res, next) {
 
 module.exports.suggestions = async function suggestions(req, res) {
   const queryResult = await catchErrors(termsQueries.suggestions)({
-    l1: "german",
+    l1: req.query.lang1,
     q: req.query.q
   })
 
