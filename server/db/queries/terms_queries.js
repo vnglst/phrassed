@@ -10,6 +10,12 @@ module.exports.getAllTerms = function getAllTerms() {
   return knex("terms").select("*")
 }
 
+module.exports.getTermsForId = function getTerms({ id }) {
+  return knex("terms")
+    .select("*")
+    .where("termid", id)
+}
+
 module.exports.getTerm = function getTerm({ term, l1, l2 }) {
   const subquery = knex("terms")
     .select("termid")

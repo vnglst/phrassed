@@ -1,7 +1,7 @@
 const {
   searchTerm,
   getTerm,
-  getSuggestions
+  getTermsForId
 } = require("../db/queries/terms_queries")
 const { searchInPhrases } = require("../db/queries/phrases_queries")
 const { isValidLanguageCombo } = require("./helpers")
@@ -19,7 +19,7 @@ module.exports.renderRoot = async function renderRoot(req, res) {
   const phrases = await searchInPhrases({ lang: l1, query: q })
 
   const title = `Phrassed - terminology translations with example phrases`
-  res.render("index", { title, l1, l2, terms, phrases })
+  res.render("index", { title, l1, l2, terms, phrases, query: q })
 }
 
 module.exports.renderTerm = async function renderTerm(req, res, next) {
@@ -31,16 +31,7 @@ module.exports.renderTerm = async function renderTerm(req, res, next) {
   const terms = await getTerm({ l1, l2, term })
 
   const title = `Phrassed: ${l2} translation for the term ${l1}: ${term}`
-  res.render("term", { title, l1, l2, terms })
-}
-
-module.exports.suggestions = async function suggestions(req, res) {
-  const { lang1, q } = req.query
-
-  const queryResult = await getSuggestions({ l1: lang1, q })
-
-  const result = queryResult.map(t => t.term)
-  res.status(200).send(result)
+  res.render("term", { title, l1, l2, terms, term })
 }
 
 module.exports.renderDomains = async function(req, res, next) {
@@ -53,7 +44,11 @@ module.exports.renderTermsForDomain = async function(req, res, next) {
   next()
 }
 
-module.exports.renderId = async function(req, res, next) {
-  // TODO: All information on term with :id, with links to source
-  next()
+module.exports.renderId = async function(req, res) {
+  const { id } = req.params
+
+  const terms = await getTermsForId({ id })
+
+  const title = `Phrassed - summary of translations for term with id ${id}`
+  res.render("id", { title, terms, id })
 }

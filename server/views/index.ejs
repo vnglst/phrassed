@@ -1,5 +1,10 @@
-<%- include('layout/header'); -%>
-    <%- include('partials/terms-partial'); -%>
+<!DOCTYPE html>
+<html>
+  <%- include('layout/head'); -%>
+  <body>
+    <%- include('partials/searchbox'); -%>
+    <h2>Results in <%= l1 %> for "<%= query %>"</h2>
+    <%- include('partials/terms'); -%>
     <ul>
       <% for(const phrase of phrases) { %>
       <li>
@@ -9,4 +14,5 @@
       </li>
       <% } %>
     </ul>
-<%- include('layout/footer'); -%>
+  </body>
+</html>

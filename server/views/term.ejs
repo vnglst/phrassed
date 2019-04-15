@@ -1,3 +1,9 @@
-<%- include('layout/header'); -%>
-<%- include('partials/terms-partial'); -%>
-<%- include('layout/footer'); -%>
+<!DOCTYPE html>
+<html>
+  <%- include('layout/head'); -%>
+  <body>
+    <%- include('partials/searchbox'); -%>
+    <h2><%= l1 %> <%= term %></h2>
+    <%- include('partials/terms'); -%>
+  </body>
+</html>
