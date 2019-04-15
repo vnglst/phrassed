@@ -1,6 +1,10 @@
-const termsQueries = require("../db/queries/terms_queries")
-const phrasesQueries = require("../db/queries/phrases_queries")
-const { catchErrors, isValidLanguageCombo } = require("./helpers")
+const {
+  searchTerm,
+  getTerm,
+  getSuggestions
+} = require("../db/queries/terms_queries")
+const { searchInPhrases } = require("../db/queries/phrases_queries")
+const { isValidLanguageCombo } = require("./helpers")
 
 const LANGS = ["german", "english", "dutch"] // TODO: from DB
 const SOURCE_LANG = "german" // TODO: from user
@@ -11,24 +15,11 @@ module.exports.renderRoot = async function renderRoot(req, res) {
   const l1 = SOURCE_LANG
   const l2 = TARGET_LANG
 
-  const terms = await catchErrors(termsQueries.searchTerm)({
-    l1,
-    l2,
-    term: q
-  })
+  const terms = await searchTerm({ l1, l2, term: q })
+  const phrases = await searchInPhrases({ lang: l1, query: q })
 
-  const phrases = await catchErrors(phrasesQueries.searchInPhrases)({
-    lang: l1,
-    query: q
-  })
-
-  res.render("index", {
-    title: `Phrassed - terminology translations with example phrases`,
-    l1,
-    l2,
-    terms,
-    phrases
-  })
+  const title = `Phrassed - terminology translations with example phrases`
+  res.render("index", { title, l1, l2, terms, phrases })
 }
 
 module.exports.renderTerm = async function renderTerm(req, res, next) {
@@ -36,25 +27,17 @@ module.exports.renderTerm = async function renderTerm(req, res, next) {
   const { term } = req.params
   if (!isValidLanguageCombo(comboArr, LANGS)) next()
   const [l1, l2] = comboArr
-  const terms = await catchErrors(termsQueries.getTerm)({
-    l1,
-    l2,
-    term
-  })
 
-  res.render("term", {
-    title: `Phrassed: ${l2} translation for the term ${l1}: ${term}`,
-    l1,
-    l2,
-    terms
-  })
+  const terms = await getTerm({ l1, l2, term })
+
+  const title = `Phrassed: ${l2} translation for the term ${l1}: ${term}`
+  res.render("term", { title, l1, l2, terms })
 }
 
 module.exports.suggestions = async function suggestions(req, res) {
-  const queryResult = await catchErrors(termsQueries.suggestions)({
-    l1: req.query.lang1,
-    q: req.query.q
-  })
+  const { lang1, q } = req.query
+
+  const queryResult = await getSuggestions({ l1: lang1, q })
 
   const result = queryResult.map(t => t.term)
   res.status(200).send(result)

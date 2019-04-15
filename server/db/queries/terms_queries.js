@@ -34,7 +34,7 @@ module.exports.searchTerm = function searchTerm({ term, l1, l2 }) {
     .where("termid", "in", subquery)
 }
 
-module.exports.suggestions = function suggestions({ q, l1 }) {
+module.exports.getSuggestions = function getSuggestions({ q, l1 }) {
   return knex("terms")
     .select("term")
     .distinct()
