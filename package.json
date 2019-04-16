@@ -23,7 +23,7 @@
     "http-errors": "1.7.2",
     "knex": "0.16.5",
     "morgan": "1.9.1",
-    "nyc": "13.3.0",
+    "nyc": "14.0.0",
     "pg": "7.9.0"
   },
   "devDependencies": {
