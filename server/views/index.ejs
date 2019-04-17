@@ -8,9 +8,8 @@
     <ul>
       <% for(const phrase of phrases) { %>
       <li>
-        <div>German: <%= phrase.de %></div>
-        <div>Dutch: <%= phrase.nl %></div>
-        <div>English: <%= phrase.en %></div>
+        <div><b><%= l1 %></b>: <%- phrase.de %></div>
+        <div><b><%= l2 %></b>: <%- phrase.nl %></div>
       </li>
       <% } %>
     </ul>

@@ -4,7 +4,7 @@ const {
   getTermsForId
 } = require("../db/queries/terms_queries")
 const { searchInPhrases } = require("../db/queries/phrases_queries")
-const { isValidLanguageCombo } = require("./helpers")
+const { isValidLanguageCombo, addHighlights } = require("./helpers")
 
 const LANGS = ["german", "english", "dutch"] // TODO: from DB
 const SOURCE_LANG = "german" // TODO: from user
@@ -16,7 +16,9 @@ module.exports.renderRoot = async function renderRoot(req, res) {
   const l2 = TARGET_LANG
 
   const terms = await searchTerm({ l1, l2, term: q })
-  const phrases = await searchInPhrases({ lang: l1, query: q })
+
+  const response = await searchInPhrases({ l1, l2, query: q })
+  const phrases = addHighlights({ l1, l2, phrases: response, terms, query: q })
 
   const title = `Phrassed - terminology translations with example phrases`
   res.render("index", { title, l1, l2, terms, phrases, query: q })

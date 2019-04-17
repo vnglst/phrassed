@@ -76,6 +76,12 @@ li {
   list-style: none;
 }
 
+.highlight {
+  background-color: yellow;
+}
+
+/* search client */
+
 .wrapper {
   position: relative;
   margin: 0.5em 0;

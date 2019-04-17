@@ -5,7 +5,7 @@
 # make sure we kill server after script finishes 
 trap 'kill $(jobs -pr)' SIGINT SIGTERM EXIT
 echo "---> Starting server"
-yarn start >/dev/null &
+yarn start:dev >/dev/null &
 
 echo "---> Resetting database"
 yarn db:reset

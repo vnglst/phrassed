@@ -27,13 +27,10 @@ describe("When sending a query", () => {
     const { text } = await request.get("/?q=Anlage")
 
     expect(text).toContain(
-      "Ich kann dir nicht sagen ob das eine gute Anlage ist."
+      'Die <span class="highlight">Anlage</span> muss transportiert werden.</div>'
     )
     expect(text).toContain(
-      "Ik kan je niet zeggen of dat een goede investering is."
-    )
-    expect(text).toContain(
-      "I can&#39;t tell you if that&#39;s a good investment."
+      'Ik kan je niet zeggen of dat een goede <span class="highlight">investering</span> is.'
     )
   })
 })
