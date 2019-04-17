@@ -6,9 +6,9 @@ exports.up = function(knex) {
       .string("sourceId")
       .notNullable()
       .unique()
-    table.string("de").notNullable()
-    table.string("nl").notNullable()
-    table.string("en").notNullable()
+    table.string("de")
+    table.string("nl")
+    table.string("en")
     table.string("domain")
     // TODO: for indices, later
     // table.specificType('en', 'tsvector').notNullable()

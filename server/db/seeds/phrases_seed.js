@@ -19,4 +19,20 @@ exports.seed = knex => {
         nl: "De installatie moet worden getransporteerd."
       })
     })
+    .then(() => {
+      return knex("phrases").insert({
+        source: "me",
+        sourceId: "3",
+        de: "Im Anhang finden Sie die von Ihnen gewünschsten Dokumente.",
+        nl: "In de bijlage vindt u de gewenste documenten."
+      })
+    })
+    .then(() => {
+      return knex("phrases").insert({
+        source: "me",
+        sourceId: "4",
+        de: "Ob eine solche Anlage eine gute Idee ist?",
+        nl: "Ik weet niet of die investering wel zo'n goed idee is!"
+      })
+    })
 }
