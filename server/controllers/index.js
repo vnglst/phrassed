@@ -11,10 +11,15 @@ module.exports = async function renderIndex(req, res) {
   const l2 = TARGET_LANG
 
   const terms = await searchTerm({ l1, l2, term: q })
-
-  const response = await searchInPhrases({ l1, l2, query: q })
-  const phrases = addHighlights({ l1, l2, phrases: response, terms, query: q })
+  const phrases = await searchInPhrases({ l1, l2, query: q })
 
   const title = `Phrassed - terminology translations with example phrases`
-  res.render("index", { title, l1, l2, terms, phrases, query: q })
+  res.render("index", {
+    title,
+    l1,
+    l2,
+    terms,
+    phrases: addHighlights({ l1, l2, phrases, terms, query: q }),
+    query: q
+  })
 }

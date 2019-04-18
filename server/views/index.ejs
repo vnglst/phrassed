@@ -3,15 +3,14 @@
   <%- include('layout/head'); -%>
   <body>
     <%- include('partials/searchbox'); -%>
-    <h2>Results in <%= l1 %> for "<%= query %>"</h2>
+    <h2><%= query %></h2> 
     <%- include('partials/terms'); -%>
-    <ul>
-      <% for(const phrase of phrases) { %>
-      <li>
-        <div><b><%= l1 %></b>: <%- phrase.de %></div>
-        <div><b><%= l2 %></b>: <%- phrase.nl %></div>
-      </li>
-      <% } %>
-    </ul>
+
+    <% for(const phrase of phrases) { %>
+    <div class="row">
+      <div class="column"><%- phrase.de %></div>
+      <div class="column"><%- phrase.nl %></div>
+    </div>
+    <% } %>
   </body>
 </html>

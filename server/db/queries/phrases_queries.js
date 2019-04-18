@@ -7,7 +7,7 @@ function searchInPhrases({ query, l1, l2 }) {
   return knex("phrases")
     .select(column1, column2)
     .whereRaw(
-      `to_tsvector('${l1}', ${column1}) @@ to_tsquery('${l1}', '${query}')`
+      `to_tsvector('${l1}', ${column1}) @@ plainto_tsquery('${l1}', '${query}')`
     )
 }
 

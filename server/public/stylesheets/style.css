@@ -76,6 +76,18 @@ li {
   list-style: none;
 }
 
+/* search results */
+
+.row {
+  display: flex;
+}
+
+.column {
+  border-top: 1px dashed grey;
+  flex: 50%;
+  padding: 0.5em;
+}
+
 .highlight {
   background-color: yellow;
 }

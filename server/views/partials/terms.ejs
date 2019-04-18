@@ -1,7 +1,12 @@
 <p>
   <% terms.forEach((term, index) => { %>
-    <b><%= index + 1 %></b>
-    <a href="<%= `/${l2}-${l1}/${term.term}` %>">
-      <%= term.term %></a><a href="<%= `/id/${term.termid}` %>"><sup><abbr title="<%= term.termid %>">*</abbr></sup></a>
+    <div>
+      <b><%= index + 1 %></b>
+      <a href="<%= `/${l2}-${l1}/${term.term}` %>">
+        <%= term.term %></a>
+      [<a href="<%= `/id/${term.termid}` %>">
+        source
+      </a>]
+    </div>
   <% }) %>
 </p>
