@@ -1,5 +1,5 @@
 const { getTerm } = require("../../db/queries/terms_queries")
-const { isValidLanguageCombo } = require("../helpers")
+const { isValidLanguageCombo } = require("../../helpers/helpers")
 
 const LANGS = ["german", "english", "dutch"] // TODO: from DB
 

@@ -1,7 +1,7 @@
 const knex = require("../connection")
-const { languages } = require("../../mappers")
+const { languages } = require("../../helpers")
 
-function searchInPhrases({ query, l1, l2 }) {
+module.exports.searchInPhrases = ({ query, l1, l2 }) => {
   const column1 = languages[l1]
   const column2 = languages[l2]
   return knex("phrases")
@@ -9,8 +9,4 @@ function searchInPhrases({ query, l1, l2 }) {
     .whereRaw(
       `to_tsvector('${l1}', ${column1}) @@ plainto_tsquery('${l1}', '${query}')`
     )
-}
-
-module.exports = {
-  searchInPhrases
 }

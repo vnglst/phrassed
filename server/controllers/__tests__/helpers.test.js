@@ -1,4 +1,4 @@
-const { addHighlights } = require("../helpers")
+const { addHighlights } = require("../../helpers")
 
 describe("#addHighlights", () => {
   it("should add spans with class highlight to terms", () => {

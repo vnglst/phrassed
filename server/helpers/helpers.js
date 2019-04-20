@@ -1,4 +1,10 @@
-const { languages } = require("../mappers")
+const languages = {
+  german: "de",
+  dutch: "nl",
+  english: "en"
+}
+
+module.exports.languages = languages
 
 module.exports.isValidLanguageCombo = (comboArr, langs) => {
   if (comboArr.length > 2) return false

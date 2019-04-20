@@ -1,6 +1,6 @@
 const { searchTerm } = require("../db/queries/terms_queries")
 const { searchInPhrases } = require("../db/queries/phrases_queries")
-const { addHighlights } = require("./helpers")
+const { addHighlights } = require("../helpers")
 
 const SOURCE_LANG = "german" // TODO: from user
 const TARGET_LANG = "dutch"
