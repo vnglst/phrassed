@@ -1,11 +1,5 @@
 const knex = require("../connection")
 
-const langTermMapper = {
-  german: "de",
-  dutch: "nl",
-  english: "en"
-}
-
 module.exports.getAllTerms = function getAllTerms() {
   return knex("terms").select("*")
 }
@@ -16,35 +10,35 @@ module.exports.getTermsForId = function getTerms({ id }) {
     .where("termid", id)
 }
 
-module.exports.getTerm = function getTerm({ term, l1, l2 }) {
+module.exports.getTerm = function getTerm({ term, source, target }) {
   const subquery = knex("terms")
     .select("termid")
-    .where("language", langTermMapper[l1])
+    .where("language", source)
     .where("term", term)
 
   return knex("terms")
     .select("*")
-    .where("language", langTermMapper[l2])
+    .where("language", target)
     .where("termid", "in", subquery)
 }
 
-module.exports.searchTerm = function searchTerm({ term, l1, l2 }) {
+module.exports.searchTerm = function searchTerm({ term, source, target }) {
   const subquery = knex("terms")
     .select("termid")
-    .where("language", langTermMapper[l1])
+    .where("language", source)
     .where("term", "ilike", `%${term}%`)
 
   return knex("terms")
     .select("*")
-    .where("language", langTermMapper[l2])
+    .where("language", target)
     .where("termid", "in", subquery)
 }
 
-module.exports.getSuggestions = function getSuggestions({ q, l1 }) {
+module.exports.getSuggestions = function getSuggestions({ q, source }) {
   return knex("terms")
     .select("term")
     .distinct()
-    .where("language", langTermMapper[l1])
+    .where("language", source)
     .where("term", "ilike", `${q}%`)
     .whereNot("term", "ilike", q)
 }

@@ -8,9 +8,10 @@ const indexRouter = require("./routes")
 
 const app = express()
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"))
-app.set("view engine", "ejs")
+// React as a template language, yay!
+app.set("views", __dirname + "/views")
+app.set("view engine", "jsx")
+app.engine("jsx", require("express-react-views").createEngine())
 
 app.use(logger("dev"))
 app.use(express.json())

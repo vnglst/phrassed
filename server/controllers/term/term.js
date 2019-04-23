@@ -1,16 +1,18 @@
 const { getTerm } = require("../../db/queries/terms_queries")
-const { isValidLanguageCombo } = require("../../helpers/helpers")
-
-const LANGS = ["german", "english", "dutch"] // TODO: from DB
+const { parseCombo } = require("../../helpers")
 
 module.exports = async function renderSingleTerm(req, res, next) {
-  const comboArr = req.params.combo.split("-")
-  const { term } = req.params
-  if (!isValidLanguageCombo(comboArr, LANGS)) next()
-  const [l1, l2] = comboArr
+  const { term, combo } = req.params
 
-  const terms = await getTerm({ l1, l2, term })
+  const { isValidCombo, source, target } = parseCombo(combo)
+  if (!isValidCombo) next()
 
-  const title = `Phrassed: ${l2} translation for the term ${l1}: ${term}`
-  res.render("term", { title, l1, l2, terms, term })
+  const terms = await getTerm({ source, target, term })
+
+  res.render("TermPage", {
+    source,
+    target,
+    terms,
+    term
+  })
 }

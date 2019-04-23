@@ -1,42 +1,35 @@
-const languages = {
-  german: "de",
-  dutch: "nl",
-  english: "en"
+const _ = require("lodash")
+
+// TODO: following language strings should be localized
+const toLangStr = {
+  de: "german",
+  nl: "dutch",
+  en: "english"
 }
 
-module.exports.languages = languages
+const toLangCode = _.invert(toLangStr)
 
-module.exports.isValidLanguageCombo = (comboArr, langs) => {
-  if (comboArr.length > 2) return false
+module.exports.toLangCode = toLangCode
+module.exports.toLangStr = toLangStr
+
+module.exports.parseCombo = comboStr => {
+  const comboArr = comboStr.split("-")
+
   const [lang1, lang2] = comboArr
-  if (lang1 === lang2) return false
-  return langs.includes(lang1) && langs.includes(lang2)
+  const source = toLangCode[lang1]
+  const target = toLangCode[lang2]
+
+  return {
+    source,
+    target,
+    isValidCombo: isValidCombo(comboArr)
+  }
 }
 
-// does a global search and adds a span tag to instances
-const addHighlight = (str, search) =>
-  str.replace(
-    // global search, whole words only
-    new RegExp("\\b" + search + "\\b", "g"),
-    `<span class="highlight">${search}</span>`
-  )
-
-// adds a span to a string for all terms
-const addHighlightsForAllTerms = (str, terms) => {
-  terms.forEach(t => {
-    str = addHighlight(str, t.term)
-  })
-  return str
-}
-
-module.exports.addHighlights = ({ l1, l2, phrases, terms, query }) => {
-  const lang1 = languages[l1]
-  const lang2 = languages[l2]
-  return phrases.map(phrase => {
-    return {
-      ...phrase,
-      [lang1]: addHighlight(phrase[lang1], query),
-      [lang2]: addHighlightsForAllTerms(phrase[lang2], terms)
-    }
-  })
+function isValidCombo(comboArr) {
+  const availableLangs = ["german", "english", "dutch"] // TODO: get these from DB?
+  if (comboArr.length > 2) return false
+  const [source, target] = comboArr
+  if (source === target) return false
+  return availableLangs.includes(source) && availableLangs.includes(target)
 }
