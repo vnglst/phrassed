@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./server",
-    "start:dev": "nodemon ./server --ext js,ejs",
+    "start:dev": "nodemon ./server --ext js,jsx",
     "verify": "yarn lint; yarn test",
     "test": "./scripts/run-tests.sh",
     "test:watch": "yarn test --watch",
