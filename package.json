@@ -41,7 +41,7 @@
     "eslint-plugin-react-hooks": "1.6.0",
     "jest": "24.7.1",
     "jest-junit": "6.3.0",
-    "nodemon": "1.18.11",
+    "nodemon": "1.19.0",
     "nyc": "14.0.0",
     "prettier": "1.17.0",
     "supertest": "4.0.2"
