@@ -1,12 +1,7 @@
 const { getAllTerms } = require("../../db/queries/terms_queries")
-const { parseCombo } = require("../../helpers")
 
 module.exports = async function renderAllTerms(req, res, next) {
-  const { combo } = req.params
-
-  const { isValidCombo, source, target } = parseCombo(combo)
-  if (!isValidCombo) next()
-
+  const { source, target } = req.phrassed
   const terms = await getAllTerms({ source })
 
   res.render("TermIndex", {

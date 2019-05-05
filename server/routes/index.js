@@ -7,6 +7,8 @@ const renderSingleId = require("../controllers/id/id")
 const renderAllTerms = require("../controllers/term")
 const renderSingleTerm = require("../controllers/term/term")
 
+const { parseCombo } = require("../middleware")
+
 const router = express.Router()
 
 // API
@@ -16,7 +18,7 @@ router.get("/api/suggestions", getSuggestions)
 router.get("/", renderIndex)
 router.get("/id/", renderAllIds)
 router.get("/id/:id", renderSingleId)
-router.get("/:combo/", renderAllTerms)
-router.get("/:combo/:term", renderSingleTerm)
+router.get("/:combo/", parseCombo, renderAllTerms)
+router.get("/:combo/:term", parseCombo, renderSingleTerm)
 
 module.exports = router
