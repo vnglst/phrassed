@@ -2,13 +2,13 @@ const React = require("react")
 const Head = require("./Head")
 
 module.exports = ({ children, ...rest }) => (
-  <html>
+  <html lang="en">
     <Head {...rest} />
     <body>
-      <h1>
-        <a href="/">Phrassed</a>
-      </h1>
-      <div id="reacthook">
+      <a className="logo" href="/">
+        Phrassed
+      </a>
+      <div id="search-bar">
         <form action="/" method="get">
           <input
             type="search"
@@ -16,7 +16,7 @@ module.exports = ({ children, ...rest }) => (
             name="q"
             aria-label="Search terminology"
           />
-          <input type="submit" />
+          <input type="submit" value="Search" />
         </form>
       </div>
       {children}

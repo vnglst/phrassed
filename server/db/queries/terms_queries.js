@@ -1,13 +1,22 @@
 const knex = require("../connection")
 
-module.exports.getAllTerms = function getAllTerms() {
-  return knex("terms").select("*")
+module.exports.getAllIds = function getAllIds() {
+  return knex("terms")
+    .select("termid")
+    .distinct()
 }
 
 module.exports.getTermsForId = function getTerms({ id }) {
   return knex("terms")
     .select("*")
     .where("termid", id)
+}
+
+module.exports.getAllTerms = function getAllTerms({ source }) {
+  return knex("terms")
+    .select("term")
+    .where("language", source)
+    .distinct()
 }
 
 module.exports.getTerm = function getTerm({ term, source, target }) {
@@ -34,11 +43,10 @@ module.exports.searchTerm = function searchTerm({ term, source, target }) {
     .where("termid", "in", subquery)
 }
 
-module.exports.getSuggestions = function getSuggestions({ q, source }) {
+module.exports.searchSuggestions = function searchSuggestions({ q, source }) {
   return knex("terms")
     .select("term")
     .distinct()
     .where("language", source)
-    .where("term", "ilike", `${q}%`)
-    .whereNot("term", "ilike", q)
+    .where("term", "ilike", `%${q}%`)
 }

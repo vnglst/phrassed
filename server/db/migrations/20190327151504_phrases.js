@@ -9,7 +9,6 @@ exports.up = function(knex) {
     table.string("de")
     table.string("nl")
     table.string("en")
-    table.string("domain")
     // TODO: for indices, later
     // table.specificType('en', 'tsvector').notNullable()
     // table.index('en', null, 'gin')

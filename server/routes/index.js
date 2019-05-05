@@ -1,17 +1,22 @@
 const express = require("express")
 
+const getSuggestions = require("../controllers/api/suggestions")
+const renderIndex = require("../controllers")
+const renderAllIds = require("../controllers/id")
+const renderSingleId = require("../controllers/id/id")
+const renderAllTerms = require("../controllers/term")
+const renderSingleTerm = require("../controllers/term/term")
+
 const router = express.Router()
 
 // API
-router.get("/api/suggestions", require("../controllers/api/suggestions"))
+router.get("/api/suggestions", getSuggestions)
 
 // Web pages
-router.get("/", require("../controllers"))
-// router.get("/id/", require("../controllers/id"))
-router.get("/id/:id", require("../controllers/id/id"))
-// router.get("/:combo/", require("../controllers/term"))
-router.get("/:combo/:term", require("../controllers/term/term"))
-// router.get("/:combo/domain/", require("../controllers/domain"))
-router.get("/:combo/domain/:domain", require("../controllers/domain/domain"))
+router.get("/", renderIndex)
+router.get("/id/", renderAllIds)
+router.get("/id/:id", renderSingleId)
+router.get("/:combo/", renderAllTerms)
+router.get("/:combo/:term", renderSingleTerm)
 
 module.exports = router

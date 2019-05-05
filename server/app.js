@@ -3,6 +3,7 @@ const express = require("express")
 const path = require("path")
 const cookieParser = require("cookie-parser")
 const logger = require("morgan")
+const expressReactViews = require("express-react-views")
 
 const indexRouter = require("./routes")
 
@@ -11,7 +12,12 @@ const app = express()
 // React as a template language, yay!
 app.set("views", __dirname + "/views")
 app.set("view engine", "jsx")
-app.engine("jsx", require("express-react-views").createEngine())
+app.engine(
+  "jsx",
+  expressReactViews.createEngine({
+    beautify: true
+  })
+)
 
 app.use(logger("dev"))
 app.use(express.json())

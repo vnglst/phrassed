@@ -1,3 +1,11 @@
+/* 
+  Color scheme:
+
+  - green: rgb(0, 114, 0);
+  - yellow: rgb(255, 255, 35);
+
+*/
+
 html {
   box-sizing: border-box;
 }
@@ -13,9 +21,9 @@ body {
   text-rendering: optimizeLegibility;
   margin: 0 auto;
   max-width: 50em;
-  line-height: 1.5em;
-  padding: 4em 1em;
-  color: #555;
+  line-height: 1.75;
+  padding: 2em 1em;
+  color: #333;
 }
 
 h1,
@@ -26,11 +34,17 @@ strong {
 
 a {
   text-decoration: none;
-  color: #41adff;
+  color: rgb(0, 114, 0);
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+*:focus {
+  outline-width: 1px;
+  outline-style: dotted;
+  outline-color: rgb(0, 114, 0);
 }
 
 button,
@@ -45,8 +59,7 @@ button {
   font-size: inherit;
   padding: 0.5em;
   border: 1px solid #333;
-  border-radius: 10px;
-  caret-color: #00baff;
+  caret-color: rgb(0, 114, 0);
 }
 
 button,
@@ -60,8 +73,8 @@ input[type="button"] {
 button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
-  background: #111;
-  color: #eee;
+  background: black;
+  color: white;
 }
 
 input:disabled {
@@ -70,26 +83,35 @@ input:disabled {
 }
 
 ul,
-li {
+ul li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* search results */
-
-.row {
-  display: flex;
+ol {
+  padding: 0 1em;
+  list-style: decimal;
 }
 
-.column {
-  border-top: 1px dashed grey;
-  flex: 50%;
-  padding: 0.5em;
+/* logo */
+
+a.logo {
+  background-color: rgb(0, 114, 0);
+  color: rgb(255, 255, 35);
+  display: inline-block;
+  font-weight: bolder;
+  font-size: 2em;
+  padding: 0.25em 0.5em;
+  transform: skew(-5deg);
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.05em;
 }
 
-.highlight {
-  background-color: yellow;
+/* search bar */
+
+#search-bar {
+  margin-top: 2em;
 }
 
 /* search client */
@@ -108,13 +130,11 @@ li {
   border-top: none;
   border: 1px solid #333;
   border-top: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color: #fff;
+  background-color: white;
 }
 
 .suggestions button {
-  background-color: #fff;
+  background-color: white;
   text-align: left;
   display: block;
   width: 100%;
@@ -124,11 +144,6 @@ li {
   padding: 0.5em 0.5em;
 }
 
-.suggestions button:last-child {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
 .suggestions button:hover {
   background-color: #eee;
   color: black;
@@ -136,4 +151,51 @@ li {
 
 .suggestions .highlighted {
   background-color: #eee;
+}
+
+/* search results */
+
+.terms {
+  margin: 0 0 0.5em 0;
+}
+
+.phrases {
+  margin: 2em 0;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  border-top: 1px dashed #333;
+  flex: 50%;
+  padding: 0.5em;
+}
+
+.highlight {
+  border-radius: 1em 0 1em 0;
+  padding: 0.25em 0;
+  background-image: linear-gradient(
+    -100deg,
+    rgba(255, 255, 35, 0.15),
+    rgba(255, 255, 35, 0.9) 70%,
+    rgba(255, 255, 35, 0.05)
+  );
+}
+
+.term-content {
+  margin: 0 0.3em 0 0;
+}
+
+.source {
+  background: #eee;
+  margin: 0 0.25em;
+  padding: 0.25em;
+  border-radius: 2px;
+  font-size: 0.75em;
+}
+
+.source a {
+  color: black;
 }

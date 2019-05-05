@@ -5,7 +5,7 @@ import {
 } from "https://unpkg.com/htm@2.1.1/preact/standalone.mjs"
 // updated version at: https://unpkg.com/htm/preact/standalone.mjs
 
-const SOURCE_LANG = "german" // TODO: from user
+const SOURCE_LANG = "de" // TODO: from user
 
 function Suggestions({ terms, activeTerm, handleClick, handleHover }) {
   return html`
@@ -47,8 +47,10 @@ class App extends Component {
   }
 
   async fetchTerms({ query }) {
-    const lang1 = SOURCE_LANG
-    const response = await fetch(`/api/suggestions/?q=${query}&lang1=${lang1}`)
+    const source = SOURCE_LANG
+    const response = await fetch(
+      `/api/suggestions/?q=${query}&source=${source}`
+    )
     const json = await response.json()
     return json
   }
@@ -131,7 +133,7 @@ class App extends Component {
               />
             `}
         </span>
-        <input type="submit" />
+        <input type="submit" value="Search" />
       </form>
     `
   }
@@ -141,5 +143,5 @@ render(
   html`
     <${App} />
   `,
-  document.getElementById("reacthook")
+  document.getElementById("search-bar")
 )

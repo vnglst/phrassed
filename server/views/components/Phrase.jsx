@@ -7,7 +7,11 @@ function addHighlights(str, words) {
     return (
       <React.Fragment key={index}>
         {hasMore ? addHighlights(part, words) : part}
-        {index < arr.length - 1 && <span className="highlight">{word}</span>}
+        {index < arr.length - 1 && (
+          <span key={index} className="highlight">
+            {word}
+          </span>
+        )}
       </React.Fragment>
     )
   })
