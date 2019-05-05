@@ -1,5 +1,5 @@
 const React = require("react")
-const Layout = require("./components/Layout")
+const { Layout } = require("./components")
 
 module.exports = function({ message, error }) {
   const title = `Phrassed - an error has occured`

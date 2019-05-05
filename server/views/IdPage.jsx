@@ -1,6 +1,5 @@
 const React = require("react")
-const Layout = require("./components/Layout")
-const Terms = require("./components/Terms")
+const { Layout, Terms } = require("./components")
 
 module.exports = function({ id, terms }) {
   const title = `Phrassed - summary of translations for term with id ${id}`
