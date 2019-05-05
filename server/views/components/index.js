@@ -1,6 +1,6 @@
 module.exports = {
   Head: require("./Head"),
   Layout: require("./Layout"),
-  Phrase: require("./Phrase"),
+  Phrases: require("./Phrases"),
   Terms: require("./Terms")
 }

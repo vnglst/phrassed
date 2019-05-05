@@ -1,7 +1,7 @@
 const knex = require("../connection")
 
 // postgres accepts following strings as inputs for languages
-const codeToPostgres = {
+const toPostgresLang = {
   de: "german",
   nl: "dutch",
   en: "english"
@@ -10,7 +10,7 @@ const codeToPostgres = {
 module.exports.searchInPhrases = ({ query, source, target }) => {
   const column1 = source
   const column2 = target
-  const postgresLang = codeToPostgres[source]
+  const postgresLang = toPostgresLang[source]
   return knex("phrases")
     .select(column1, column2)
     .whereRaw(

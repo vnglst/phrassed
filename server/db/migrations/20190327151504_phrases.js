@@ -1,9 +1,8 @@
 exports.up = function(knex) {
   return knex.schema.createTable("phrases", table => {
     table.increments()
-    table.string("source").notNullable()
     table
-      .string("sourceId")
+      .string("phraseid")
       .notNullable()
       .unique()
     table.string("de")
