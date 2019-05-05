@@ -6,6 +6,6 @@ module.exports = ({ title }) => (
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script src="/search-client.js" type="module" />
+    <script src="/searchClient.js" type="module" />
   </head>
 )

@@ -1,4 +1,4 @@
-const { searchSuggestions } = require("../../db/queries/terms_queries")
+const { searchSuggestions } = require("../../db/queries/suggestionsQueries")
 
 module.exports = async function getSuggestions(req, res) {
   const { source, q } = req.query

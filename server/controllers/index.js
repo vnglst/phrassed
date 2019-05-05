@@ -1,7 +1,7 @@
-const { searchTerm } = require("../db/queries/terms_queries")
-const { searchInPhrases } = require("../db/queries/phrases_queries")
+const { searchTerm } = require("../db/queries/termsQueries")
+const { searchInPhrases } = require("../db/queries/phrasesQueries")
 
-module.exports = async function renderIndex(req, res) {
+module.exports.renderIndex = async function renderIndex(req, res) {
   const { q } = req.query
   const source = "de" // from user?
   const target = "nl"
@@ -9,7 +9,7 @@ module.exports = async function renderIndex(req, res) {
   const terms = await searchTerm({ source, target, term: q })
   const phrases = await searchInPhrases({ source, target, query: q })
 
-  res.render("IndexPage", {
+  res.render("Index", {
     source,
     target,
     terms,

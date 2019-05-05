@@ -1,11 +1,9 @@
 const express = require("express")
 
-const getSuggestions = require("../controllers/api/suggestions")
-const renderIndex = require("../controllers")
-const renderAllIds = require("../controllers/id")
-const renderSingleId = require("../controllers/id/id")
-const renderAllTerms = require("../controllers/term")
-const renderSingleTerm = require("../controllers/term/term")
+const { getSuggestions } = require("../controllers/api")
+const { renderIndex } = require("../controllers")
+const { renderAllIds, renderSingleId } = require("../controllers/ids")
+const { renderAllTerms, renderSingleTerm } = require("../controllers/terms")
 
 const { parseCombo } = require("../middleware")
 
