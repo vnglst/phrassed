@@ -1,7 +1,7 @@
 .env
 node_modules
-data
 .vscode
+tmp
 coverage
 reports
 junit.xml
