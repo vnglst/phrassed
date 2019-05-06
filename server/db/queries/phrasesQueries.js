@@ -4,7 +4,14 @@ const knex = require("../connection")
 const toPostgresLang = {
   de: "german",
   nl: "dutch",
-  en: "english"
+  en: "english",
+  fr: "french",
+  es: "spanisch",
+  pt: "portuguese",
+  fi: "finnish",
+  it: "italian",
+  sv: "swedisch",
+  el: "greek"
 }
 
 module.exports.searchInPhrases = ({ query, source, target }) => {
@@ -16,4 +23,5 @@ module.exports.searchInPhrases = ({ query, source, target }) => {
     .whereRaw(
       `to_tsvector('${postgresLang}', ${column1}) @@ plainto_tsquery('${postgresLang}', '${query}')`
     )
+    .whereNotNull(column2)
 }

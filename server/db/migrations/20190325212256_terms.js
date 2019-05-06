@@ -3,7 +3,7 @@ exports.up = function(knex) {
     table.increments()
     table.string("termid").notNullable()
     table.string("language").notNullable()
-    table.string("term")
+    table.text("term")
   })
 }
 

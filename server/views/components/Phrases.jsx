@@ -31,6 +31,7 @@ function Phrase({ source, target, phrase, terms, query }) {
 }
 
 function addHighlights(str, words) {
+  if (!str) return
   const hasMore = words.length > 1
   const word = words.pop()
   return str.split(word).map((part, index, arr) => {

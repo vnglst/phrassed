@@ -5,6 +5,7 @@ module.exports.getAllTerms = function getAllTerms({ source }) {
     .select("term")
     .where("language", source)
     .distinct()
+    .limit(500)
 }
 
 module.exports.getTerm = function getTerm({ term, source, target }) {
@@ -23,7 +24,7 @@ module.exports.searchTerm = function searchTerm({ term, source, target }) {
   const subquery = knex("terms")
     .select("termid")
     .where("language", source)
-    .where("term", "ilike", `%${term}%`)
+    .where("term", "ilike", `${term}%`)
 
   return knex("terms")
     .select("*")

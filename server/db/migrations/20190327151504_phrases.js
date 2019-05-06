@@ -6,6 +6,13 @@ exports.up = function(knex) {
       .notNullable()
       .unique()
     table.string("de")
+    table.string("fr")
+    table.string("es")
+    table.string("pt")
+    table.string("fi")
+    table.string("it")
+    table.string("sv")
+    table.string("el")
     table.string("nl")
     table.string("en")
     // TODO: for indices, later

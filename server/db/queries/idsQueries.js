@@ -4,6 +4,7 @@ module.exports.getAllIds = function getAllIds() {
   return knex("terms")
     .select("termid")
     .distinct()
+    .limit(500)
 }
 
 module.exports.getTermsForId = function getTerms({ id }) {

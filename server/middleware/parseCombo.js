@@ -1,4 +1,4 @@
-const { toLangCode } = require("../helpers")
+const { toLangCode, availableLangs } = require("../helpers")
 
 module.exports = function handleCombo(req, res, next) {
   const { combo } = req.params
@@ -29,7 +29,6 @@ function parseCombo(comboStr) {
 }
 
 function isValidCombo(comboArr) {
-  const availableLangs = ["german", "english", "dutch"] // TODO: get these from DB?
   if (comboArr.length > 2) return false
   const [source, target] = comboArr
   if (source === target) return false
