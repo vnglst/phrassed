@@ -1,6 +1,6 @@
 const program = require("commander")
 const XmlStream = require("xml-stream")
-const packageJson = require("./package.json")
+const packageJson = require("./package.json.js")
 
 /*
 	Outputs following JSON
@@ -8,7 +8,7 @@ const packageJson = require("./package.json")
 		{
 			termid: string,			// "IATE-14"
 			language: string,		// "de"
-			term: string,			// "Anlage"
+			term: string,			  // "Anlage"
 		},
 		etc.
 	]

@@ -1,18 +1,14 @@
 {
-  "name": "tbx2json",
-  "version": "3.0.0",
-  "description": "Converts tbx to json",
-  "main": "./tbx2json.js",
+  "name": "phrassed-workers",
+  "version": "1.0.0",
+  "description": "Database conversions",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vnglst/tbx2json.git"
-  },
   "dependencies": {
+    "JSONStream": "^1.3.5",
     "commander": "^2.20.0",
     "csv": "^5.1.1",
     "xml-stream": "^0.4.5"

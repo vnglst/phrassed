@@ -6,7 +6,7 @@
     "start": "node ./server",
     "start:dev": "nodemon ./server --ext js,jsx",
     "verify": "yarn lint; yarn test",
-    "test": "./scripts/run-tests.sh",
+    "test": "NODE_ENV=test ./scripts/run-tests.sh",
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test --reporters=default --reporters=jest-junit",
     "test:ci": "yarn test:coverage",
