@@ -9,12 +9,12 @@ describe("When querying for a term", () => {
       .expect("Content-Type", /json/)
       .expect(200)
 
-    expect(body).toEqual(["Anl.", "Anlage", "Geldanlage", "Kapitalanlage"])
+    expect(body).toEqual(["Anl.", "Anlage"])
   })
 
   it("should contain the query term itself", async () => {
     const { body } = await request.get("/api/suggestions/?q=Anlage&source=de")
-    expect(body).toEqual(["Anlage", "Geldanlage", "Kapitalanlage"])
+    expect(body).toEqual(["Anlage"])
   })
 
   it.skip("should error if source lang is missing", async () => {
