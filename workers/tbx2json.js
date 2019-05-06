@@ -1,6 +1,6 @@
 const program = require("commander")
 const XmlStream = require("xml-stream")
-const packageJson = require("./package.json.js")
+const packageJson = require("./package.json")
 
 /*
 	Outputs following JSON
