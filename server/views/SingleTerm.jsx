@@ -6,7 +6,13 @@ module.exports = function({ source, target, term, terms, phrases }) {
   return (
     <Layout title={title}>
       <h2>{term}</h2>
-      <Terms source={source} target={target} terms={terms} />
+      <Terms.List
+        source={source}
+        target={target}
+        terms={terms}
+        showContent
+        showSource
+      />
       <Phrases
         source={source}
         target={target}

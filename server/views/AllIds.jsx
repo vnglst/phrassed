@@ -6,7 +6,7 @@ module.exports = function({ terms }) {
   return (
     <Layout title={title}>
       <h2>All ids</h2>
-      <Terms terms={terms} />
+      <Terms.List terms={terms} showSource showContent showLanguage />
     </Layout>
   )
 }

@@ -9,7 +9,13 @@ module.exports = function({ source, target, terms }) {
       <h2>
         {source} terms with {target} translations
       </h2>
-      <Terms source={target} target={source} terms={terms} />
+      <Terms.List
+        source={target}
+        target={source}
+        terms={terms}
+        showContent
+        showSource
+      />
     </Layout>
   )
 }

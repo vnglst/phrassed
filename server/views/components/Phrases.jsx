@@ -1,4 +1,5 @@
 const React = require("react")
+const addHighlights = require("./addHighlights")
 
 module.exports = function Phrases({ source, target, phrases, terms, query }) {
   return (
@@ -28,22 +29,4 @@ function Phrase({ source, target, phrase, terms, query }) {
       <div className="column">{targetWithHighlights}</div>
     </div>
   )
-}
-
-function addHighlights(str, words) {
-  if (!str) return
-  const hasMore = words.length > 1
-  const word = words.pop()
-  return str.split(word).map((part, index, arr) => {
-    return (
-      <React.Fragment key={index}>
-        {hasMore ? addHighlights(part, words) : part}
-        {index < arr.length - 1 && (
-          <span key={index} className="highlight">
-            {word}
-          </span>
-        )}
-      </React.Fragment>
-    )
-  })
 }

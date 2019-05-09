@@ -9,7 +9,7 @@ module.exports = function({ id, terms }) {
   return (
     <Layout title={title}>
       <h2>{id}</h2>
-      <Terms terms={terms} />
+      <Terms.List terms={terms} showContent showSource showLanguage />
       Link to <a href={sourceUrl}>term on IATE</a>
     </Layout>
   )

@@ -58,6 +58,7 @@ class App extends Component {
   async handleChange(e) {
     const query = e.target.value
     this.setState({ query })
+    if (query.length <= 3) return
     const terms = await this.fetchTerms({ query })
     this.setState({ terms, isOpen: true })
   }

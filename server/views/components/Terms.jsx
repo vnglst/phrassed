@@ -1,34 +1,73 @@
 const React = require("react")
 const { toLangStr } = require("../../helpers")
+const _ = require("lodash")
+const addHighlights = require("./addHighlights")
 
-module.exports = function Terms({ terms, source, target }) {
+module.exports = {
+  GroupedList,
+  List,
+  Term,
+  TermContent,
+  Language,
+  Source
+}
+
+function GroupedList({ terms, source, target, query }) {
+  const groupedTerms = Object.values(_.groupBy(terms, "termid"))
+  return (
+    <ul>
+      {groupedTerms.map((termSet, idx) => {
+        const sourceTerm = termSet.find(t => t.language === source)
+        if (!sourceTerm) return null
+        const highlighted = addHighlights(sourceTerm.term, [query])
+        const targetTerms = termSet.filter(t => t.language === target)
+
+        return (
+          <li key={idx}>
+            <b>{highlighted}</b>
+            <Source termid={sourceTerm.termid} />
+            <List
+              terms={targetTerms}
+              source={source}
+              target={target}
+              showContent
+            />
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+function List({ terms, ...rest }) {
   return (
     <ol className="terms">
       {terms.map((term, index) => (
-        <Term key={index} source={source} target={target} term={term} />
+        <Term key={index} term={term} {...rest} />
       ))}
     </ol>
   )
 }
 
-function Term({ term, source, target }) {
+function Term({ term, source, target, showLanguage, showSource, showContent }) {
   const sourceStr = toLangStr[source]
   const targetStr = toLangStr[target]
   const baseUrl = sourceStr && targetStr && `/${targetStr}-${sourceStr}`
 
   return (
     <li className="term" key={term.termid}>
-      <Language language={term.language} />
-      <TermContent baseUrl={baseUrl} term={term.term} />
-      <Source termid={term.termid} />
+      {showLanguage && <Language language={term.language} />}
+      {showContent && <TermContent baseUrl={baseUrl} term={term.term} />}
+      {showSource && <Source termid={term.termid} />}
     </li>
   )
 }
 
 function Language({ language }) {
   if (!language) return null
-  // TODO: replace with flag icons
-  return <code>[{language}] </code>
+
+  // TODO: use flag icons here
+  return <span className="term-language">{language}</span>
 }
 
 function TermContent({ baseUrl, term }) {
@@ -43,8 +82,9 @@ function TermContent({ baseUrl, term }) {
 
 function Source({ termid }) {
   if (!termid) return null
+
   return (
-    <span className="source">
+    <span className="term-source">
       <a href={`/id/${termid}`}>{termid}</a>
     </span>
   )
