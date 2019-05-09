@@ -21,7 +21,7 @@ module.exports.getTerm = function getTerm({ term, source, target }) {
 }
 
 module.exports.searchTerm = function searchTerm({ term, source, target }) {
-  // TODO: simplify this query and improve performace
+  // TODO: simplify this query and improve performance
   const targetLanguage = knex("terms")
     .select("termid")
     .where("language", target)

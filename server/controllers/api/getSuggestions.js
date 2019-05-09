@@ -6,6 +6,5 @@ module.exports = async function getSuggestions(req, res) {
   const queryResult = await searchSuggestions({ source, q })
 
   const result = queryResult.map(t => t.term)
-  const uniqueResults = [...new Set(result)] // filter out duplicates
-  res.status(200).send(uniqueResults)
+  res.status(200).send(result)
 }
