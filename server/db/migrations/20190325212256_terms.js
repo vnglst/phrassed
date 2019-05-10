@@ -1,9 +1,9 @@
 exports.up = function(knex) {
-  return knex.schema.createTable("terms", table => {
-    table.increments()
-    table.string("termid").notNullable()
-    table.string("language").notNullable()
-    table.text("term")
+  return knex.schema.createTable("terms", t => {
+    t.increments()
+    t.string("termid").notNullable()
+    t.string("language").notNullable()
+    t.text("term")
   })
 }
 
