@@ -8,9 +8,9 @@
   "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
   "license": "MIT",
   "dependencies": {
-    "JSONStream": "^1.3.5",
-    "commander": "^2.20.0",
-    "csv": "^5.1.1",
-    "xml-stream": "^0.4.5"
+    "JSONStream": "1.3.5",
+    "commander": "2.20.0",
+    "csv": "5.1.1",
+    "xml-stream": "0.4.5"
   }
 }
