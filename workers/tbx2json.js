@@ -1,6 +1,10 @@
 const program = require("commander")
-const XmlStream = require("xml-stream")
-const packageJson = require("./package.json")
+const fs = require("fs")
+const zlib = require("zlib")
+
+const parser = require("./parser")
+const packageJson = require("../package.json")
+const decompress = zlib.createBrotliDecompress()
 
 /*
 	Outputs following JSON
@@ -20,75 +24,40 @@ const packageJson = require("./package.json")
 
 program
   .version(packageJson.version)
+  .option("-i --input <file>", "input file: gzipped tbx format")
+  .option("-o --output <file>", "output filename (.json)")
   .option(
     "-e, --encoding <encoding>",
-    "encoding of tbx file, e.g. utf16le. Default is utf8"
+    "encoding of tbx file, e.g. utf16le. Default is utf8",
+    "utf8"
   )
-  .option("--nofail", "don't fail on error, you could be missing some data")
+  .option(
+    "--nofail",
+    "don't fail on error, you could be missing some data",
+    false
+  )
   .on("--help", function() {
     console.log("\n  Examples:\n")
-    console.log("    $ cat some-termbase.tbx | node tbx2json.js")
-    console.log("    $ cat some-termbase.tbx | tbx2json")
-    console.log("\n  With jq and unzip:\n")
     console.log(
-      '    $ unzip -p example-termbase.zip | node tbx2json.js --nofail | jq "." > output.json'
+      "    $ node tbx2json.js --input some-termbase.tmx.gz --output output.json"
+    )
+    console.log("\n  With jq for validation:\n")
+    console.log(
+      '    $ node tbx2json.js --input some-termbase.tmx.gz --nofail | jq "."'
     )
   })
   .parse(process.argv)
 
-const encoding = program.encoding || "utf8" // Default encoding = utf8
-const nofail = program.nofail || false
+const inputTbx = program.input
+const outputFile = program.output
+const encoding = program.encoding
+const nofail = program.nofail
 
-const output = process.stdout
-const input = process.stdin
-  .setEncoding(encoding)
-  .on("end", () => output.write("]")) // close array
+const fileContents = fs.createReadStream(inputTbx)
+const outputStream = outputFile
+  ? fs.createWriteStream(outputFile)
+  : process.stdout
 
-output.write("[") // open array for valid JSON
+const inputStream = fileContents.pipe(decompress)
 
-parser(input, output)
-
-function parser(inputStream, outputStream) {
-  const xml = new XmlStream(inputStream, encoding)
-
-  // for parsing
-  let first = true
-  let language = null
-  let id = null
-
-  xml.collect("langSet")
-
-  xml.on("startElement: termEntry", el => {
-    id = el.$.id
-  })
-
-  xml.on("endElement: termEntry", () => {
-    id = null
-  })
-
-  xml.on("startElement: langSet", el => {
-    language = el.$["xml:lang"]
-  })
-
-  xml.on("endElement: langSet", () => {
-    language = null
-  })
-
-  xml.on("endElement: term", item => {
-    // Hacky, adds comma before every JSON object (except first)
-    let output = first ? "" : ",\n"
-    first = false
-    const term = {
-      termid: id,
-      language,
-      term: item.$text
-    }
-    output += JSON.stringify(term, null, 4)
-    outputStream.write(output)
-  })
-
-  xml.on("error", message => {
-    if (nofail) return
-    throw new Error(message)
-  })
-}
+parser({ inputStream, outputStream, encoding, nofail })

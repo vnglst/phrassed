@@ -2,12 +2,12 @@ const supertest = require("supertest")
 
 const request = supertest("http://localhost:3000")
 
-describe("When loading the page for a term", () => {
+describe("When loading the page for term Anlage", () => {
   it("should respond with 200 ok", () => {
     return request.get("/german-dutch/Anlage").expect(200)
   })
 
-  it("should contain term and translations", async () => {
+  it("should contain term and translations from seed", async () => {
     const { text } = await request.get("/german-dutch/Anlage")
 
     expect(text).toContain("Anlage")
@@ -27,16 +27,27 @@ describe("When loading the page for a term", () => {
   })
 })
 
+describe("When loading the page for term Arbeitserlaubnis", () => {
+  it("should respond with 200 ok", () => {
+    return request.get("/german-dutch/Arbeitserlaubnis").expect(200)
+  })
+
+  it("should contain term and translations from seed", async () => {
+    const { text } = await request.get("/german-dutch/Arbeitserlaubnis")
+
+    expect(text).toContain("Arbeitserlaubnis")
+    expect(text).toContain("werkvergunning")
+    expect(text).toContain("arbeidskaart")
+  })
+})
+
 describe("When loading page with all terms", () => {
   it("should respond with 200 ok", () => {
     return request.get("/german-dutch/").expect(200)
   })
 
-  it("should contain all terms", async () => {
+  it("should contain heading", async () => {
     const { text } = await request.get("/german-dutch/")
-
-    expect(text).toContain("Geldanlage")
-    expect(text).toContain("Investition")
-    expect(text).toContain("Kapitalanlage")
+    expect(text).toContain("de terms with nl translations")
   })
 })

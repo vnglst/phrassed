@@ -20,10 +20,8 @@ describe("When loading the ids page", () => {
     return request.get("/id/").expect(200)
   })
 
-  it("should contain all ids", async () => {
+  it("should contain All ids heading", async () => {
     const { text } = await request.get("/id/")
-    expect(text).toContain("IATE-136722")
-    expect(text).toContain("IATE-1104363")
-    expect(text).toContain("IATE-142004")
+    expect(text).toContain("All ids")
   })
 })

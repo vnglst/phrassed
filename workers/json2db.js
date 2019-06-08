@@ -2,6 +2,12 @@ const knex = require("../server/db/connection")
 const JSONStream = require("JSONStream")
 const { Writable } = require("stream")
 
+/*
+   Usage:
+   $ cat some-termbase.json | node json2db.js
+
+*/
+
 function insertTerm(term) {
   return knex("terms").insert(term)
 }
