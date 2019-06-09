@@ -1,1 +1,2 @@
 seed-data/IATE_export_26022019.xml.br filter=lfs diff=lfs merge=lfs -text
+seed-data/IATE_export_26022019.json.br filter=lfs diff=lfs merge=lfs -text
