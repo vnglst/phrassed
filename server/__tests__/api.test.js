@@ -27,3 +27,21 @@ describe("When querying for a term", () => {
     expect(body).toEqual([])
   })
 })
+
+describe("When requesting stats", () => {
+  it("should respond with 200 ok and stats", async () => {
+    const { body } = await request
+      .get("/api/stats/")
+      .expect("Content-Type", /json/)
+      .expect(200)
+
+    expect(body.totalTerms).toEqual([{ count: "18176" }])
+    expect(body.totalEntries).toEqual([{ count: "1742" }])
+
+    const nlCounts = body.langCounts.find(el => el.language === "nl")
+    expect(nlCounts).toEqual({ language: "nl", count: "785" })
+
+    const deCounts = body.langCounts.find(el => el.language === "de")
+    expect(deCounts).toEqual({ language: "de", count: "1080" })
+  })
+})

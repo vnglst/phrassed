@@ -1,6 +1,6 @@
 const knex = require("../connection")
 
-module.exports.searchSuggestions = function searchSuggestions({ q, source }) {
+exports.searchSuggestions = function searchSuggestions({ q, source }) {
   // TODO: simplify this query and improve performance
 
   const targetLanguage = knex("terms")

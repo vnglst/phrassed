@@ -14,7 +14,7 @@ const toPostgresLang = {
   el: "greek"
 }
 
-module.exports.searchInPhrases = ({ query, source, target }) => {
+exports.searchInPhrases = ({ query, source, target }) => {
   const column1 = source
   const column2 = target
   const postgresLang = toPostgresLang[source]

@@ -1,6 +1,6 @@
 const knex = require("../connection")
 
-module.exports.getAllTerms = function getAllTerms({ source }) {
+exports.getAllTerms = function getAllTerms({ source }) {
   return knex("terms")
     .select("term")
     .where("language", source)
@@ -8,7 +8,7 @@ module.exports.getAllTerms = function getAllTerms({ source }) {
     .limit(500)
 }
 
-module.exports.getTerm = function getTerm({ term, source, target }) {
+exports.getTerm = function getTerm({ term, source, target }) {
   const subquery = knex("terms")
     .select("termid")
     .where("language", source)
@@ -20,7 +20,7 @@ module.exports.getTerm = function getTerm({ term, source, target }) {
     .where("termid", "in", subquery)
 }
 
-module.exports.searchTerm = function searchTerm({ term, source, target }) {
+exports.searchTerm = function searchTerm({ term, source, target }) {
   // TODO: simplify this query and improve performance
   const targetLanguage = knex("terms")
     .select("termid")

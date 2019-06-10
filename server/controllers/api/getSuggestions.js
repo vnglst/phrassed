@@ -1,6 +1,6 @@
 const { searchSuggestions } = require("../../db/queries/suggestionsQueries")
 
-module.exports = async function getSuggestions(req, res) {
+exports.getSuggestions = async function getSuggestions(req, res) {
   const { source, q } = req.query
 
   const queryResult = await searchSuggestions({ source, q })
