@@ -27,17 +27,20 @@ describe("When loading the page for term Anlage", () => {
   })
 })
 
-describe("When loading the page for term Arbeitserlaubnis", () => {
+describe("When loading the page for term 'kleinschalige corruptie'", () => {
   it("should respond with 200 ok", () => {
-    return request.get("/german-dutch/Arbeitserlaubnis").expect(200)
+    return request.get("/dutch-german/kleinschalige_corruptie").expect(200)
   })
 
-  it("should contain term and translations from seed", async () => {
-    const { text } = await request.get("/german-dutch/Arbeitserlaubnis")
+  it("should find term page", async () => {
+    const { text } = await request.get("/dutch-german/kleinschalige_corruptie")
+    expect(text).toContain("kleinschalige corruptie")
+  })
 
-    expect(text).toContain("Arbeitserlaubnis")
-    expect(text).toContain("werkvergunning")
-    expect(text).toContain("arbeidskaart")
+  it("should contain German translations", async () => {
+    const { text } = await request.get("/dutch-german/kleinschalige_corruptie")
+    expect(text).toContain("Kleinkorruption")
+    expect(text).toContain("IATE-3555954")
   })
 })
 

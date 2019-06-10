@@ -1,5 +1,6 @@
 const React = require("react")
-const { toLangStr } = require("../../helpers")
+const { toLangStr } = require("../../helpers/langCodes")
+const { encodeSlug } = require("../../helpers/url")
 const _ = require("lodash")
 const addHighlights = require("./addHighlights")
 
@@ -72,10 +73,11 @@ function Language({ language }) {
 
 function TermContent({ baseUrl, term }) {
   if (!term) return null
+  const termSlug = encodeSlug(term)
 
   return (
     <span className="term-content">
-      {baseUrl ? <a href={`${baseUrl}/${term}`}>{term}</a> : term}
+      {baseUrl ? <a href={`${baseUrl}/${termSlug}`}>{term}</a> : term}
     </span>
   )
 }

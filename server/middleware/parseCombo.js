@@ -1,4 +1,4 @@
-const { toLangCode, availableLangs } = require("../helpers")
+const { toLangCode, availableLangs } = require("../helpers/langCodes")
 
 module.exports = function handleCombo(req, res, next) {
   const { combo } = req.params
