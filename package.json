@@ -37,7 +37,7 @@
     "commander": "2.20.0",
     "csv": "5.1.1",
     "eslint": "5.16.0",
-    "eslint-config-prettier": "4.3.0",
+    "eslint-config-prettier": "5.1.0",
     "eslint-config-react-app": "4.0.1",
     "eslint-plugin-flowtype": "3.11.1",
     "eslint-plugin-import": "2.18.0",
