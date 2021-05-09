@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/phrassed
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:15
       - image: postgres:11
         environment:
           POSTGRES_USER: postgres
